@@ -1,10 +1,10 @@
 {
-  "name": "desarrolla2/menu-bundle",
+  "name": "shegroup/menu-bundle",
   "description": "This bundle provides a menu bundle for symfony2",
   "type": "symfony-bundle",
   "autoload": {
     "psr-4": {
-      "Desarrolla2\\MenuBundle\\": ""
+      "SheGroup\\MenuBundle\\": ""
     }
   },
   "require": {
@@ -15,6 +15,10 @@
     {
       "name": "Daniel González Cerviño",
       "email": "daniel@desarrolla2.com"
+    },
+    {
+      "name": "Carlos Garbajosa Barros",
+      "email": "carlos@damecode.com"
     }
   ]
 }
