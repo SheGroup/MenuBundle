@@ -1,0 +1,12 @@
+{% spaceless %}
+    <li class="{{ item.class }}" {{ item.attributes|raw }}>
+        <a href="{{ item.link }}" class="{{ item.anchor_class }}" {{ item.anchor_attributes|raw }}>
+            {% if item.icon %}
+                <em class="{{ item.icon }}" aria-hidden="true"></em>
+            {% endif %}
+            {% if menu.use_span %}
+                <span>{% endif %}{{ item.name ? item.name|trans|capitalize : '' }}{% if menu.use_span %}</span>
+            {% endif %}
+        </a>
+    </li>
+{% endspaceless %}

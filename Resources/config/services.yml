@@ -1,7 +1,0 @@
-services:
-    core.twig.menu_extension:
-        class: 'Desarrolla2\MenuBundle\Twig\MenuExtension'
-        arguments:
-            - '@service_container'
-        tags:
-            - { name: 'twig.extension' }

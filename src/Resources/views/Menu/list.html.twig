@@ -1,0 +1,7 @@
+{% spaceless %}
+    <ul class="menu-list list-inline {{ menu.class }}" {{ menu.attributes|raw }}>
+        {% for item in menu.items %}
+            {% include '@SheGroupMenu/Menu/item.html.twig' %}
+        {% endfor %}
+    </ul>
+{% endspaceless %}

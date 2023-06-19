@@ -1,0 +1,11 @@
+{% spaceless %}
+    <ul class="{{ menu.class }}" {{ menu.attributes|raw }}>
+        {% for item in menu.items %}
+            {% if item.items|length %}
+                {% include '@SheGroupMenu/Menu/items.html.twig' with {'items': item.items} %}
+            {% else %}
+                {% include '@SheGroupMenu/Menu/item.html.twig' %}
+            {% endif %}
+        {% endfor %}
+    </ul>
+{% endspaceless %}

@@ -1,0 +1,34 @@
+{% spaceless %}
+    {% if item.items|length == 0 %}
+        {# Nothing #}
+    {#% elseif item.items|length == 1 %}
+      {% include '@SheGroupMenu/Menu/item.html.twig' with {'item': item.items|first} %#}
+    {% else %}
+        <li class="treeview {{ item.class }}" {{ item.attributes|raw }}>
+            <a href="{{ item.link }}" class="{{ item.anchor_class }}" {{ item.anchor_attributes|raw }}>
+                {% if item.icon %}
+                    <em class="{{ item.icon }}" aria-hidden="true"></em>
+                {% endif %}
+                {% if menu.use_span %}
+                    <span>{% endif %}{{ item.name ? item.name|trans|capitalize : '' }}{% if menu.use_span %}</span>
+                {% endif %}
+                <span class="pull-right-container">
+                    <em class="fa fa-angle-left pull-right" aria-hidden="true" style="margin-right: 5px"> </em>
+                    <span class="sr-only">{{ 'expand'|trans|capitalize }}</span>
+                </span>
+            </a>
+            <ul class="treeview-menu">
+                {% for subItem in item.items %}
+                    {% if subItem.items|length > 0 %}
+                        {% include '@SheGroupMenu/Menu/items.html.twig' with {
+                            'item': subItem,
+                            'items': subItem.items,
+                        } %}
+                    {% else %}
+                        {% include '@SheGroupMenu/Menu/item.html.twig' with {'item': subItem} %}
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </li>
+    {% endif %}
+{% endspaceless %}

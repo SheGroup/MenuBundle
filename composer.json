@@ -1,14 +1,15 @@
 {
   "name": "shegroup/menu-bundle",
-  "description": "This bundle provides a menu bundle for symfony2",
+  "description": "This bundle provides a menu bundle for Symfony",
   "type": "symfony-bundle",
   "autoload": {
     "psr-4": {
-      "SheGroup\\MenuBundle\\": ""
+      "SheGroup\\MenuBundle\\": "src/"
     }
   },
   "require": {
-    "symfony/framework-bundle": "^4.0"
+    "php": ">=7.2",
+    "symfony/framework-bundle": "^3.4"
   },
   "license": "MIT",
   "authors": [
