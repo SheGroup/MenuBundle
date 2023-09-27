@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace SheGroup\MenuBundle\Twig\Extension;
 
-use Twig_Extension;
-use Twig_SimpleFunction;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFunction;
 
-final class MenuExtension extends Twig_Extension
+final class MenuExtension extends AbstractExtension
 {
     public function getFunctions(): array
     {
         return [
-            new Twig_SimpleFunction(
+            new TwigFunction(
                 'renderMenu',
                 [MenuExtensionRuntime::class, 'render'],
                 [
