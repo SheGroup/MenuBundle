@@ -1,4 +1,4 @@
-{% spaceless %}
+{% apply spaceless %}
     <li class="{{ item.class }}" {{ item.attributes|raw }}>
         <a href="{{ item.link }}" class="{{ item.anchor_class }}" {{ item.anchor_attributes|raw }}>
             {% if item.icon %}
@@ -9,4 +9,4 @@
             {% endif %}
         </a>
     </li>
-{% endspaceless %}
+{% endapply %}

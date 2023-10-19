@@ -1,4 +1,4 @@
-{% spaceless %}
+{% apply spaceless %}
     <ul class="{{ menu.class }}" {{ menu.attributes|raw }}>
         {% for item in menu.items %}
             {% if item.items|length %}
@@ -8,4 +8,4 @@
             {% endif %}
         {% endfor %}
     </ul>
-{% endspaceless %}
+{% endapply %}
