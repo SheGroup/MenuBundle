@@ -1,4 +1,4 @@
-{% spaceless %}
+{% apply spaceless %}
     {% if item.items|length == 0 %}
         {# Nothing #}
     {#% elseif item.items|length == 1 %}
@@ -31,4 +31,4 @@
             </ul>
         </li>
     {% endif %}
-{% endspaceless %}
+{% endapply %}
