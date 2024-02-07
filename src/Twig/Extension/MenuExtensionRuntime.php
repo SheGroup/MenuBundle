@@ -13,18 +13,10 @@ use Twig\Error\RuntimeError;
 use Twig\Error\SyntaxError;
 use Twig\Extension\RuntimeExtensionInterface;
 
-final class MenuExtensionRuntime implements RuntimeExtensionInterface
+final readonly class MenuExtensionRuntime implements RuntimeExtensionInterface
 {
-    /** @var MenuLocator */
-    private $menuLocator;
-
-    /** @var MenuBuilder */
-    private $menuBuilder;
-
-    public function __construct(MenuLocator $menuLocator, MenuBuilder $menuBuilder)
+    public function __construct(private MenuLocator $menuLocator, private MenuBuilder $menuBuilder)
     {
-        $this->menuLocator = $menuLocator;
-        $this->menuBuilder = $menuBuilder;
     }
 
     /** @throws LoaderError|SyntaxError|RuntimeError|InvalidMenuException */
@@ -36,9 +28,9 @@ final class MenuExtensionRuntime implements RuntimeExtensionInterface
         $loader = $env->getLoader();
         if (
             method_exists($loader, 'exists')
-            && $loader->exists(sprintf('SheGroupMenuBundle:Menu:%s.html.twig', $template))
+            && $loader->exists(sprintf('@SheGroupMenu/Menu/%s.html.twig', $template))
         ) {
-            return $env->render(sprintf('SheGroupMenuBundle:Menu:%s.html.twig', $template), ['menu' => $menu]);
+            return $env->render(sprintf('@SheGroupMenu/Menu/%s.html.twig', $template), ['menu' => $menu]);
         }
 
         return $env->render($template, ['menu' => $menu]);

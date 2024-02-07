@@ -11,9 +11,6 @@ final class Configuration implements ConfigurationInterface
 {
     public function getConfigTreeBuilder(): TreeBuilder
     {
-        $treeBuilder = new TreeBuilder();
-        $treeBuilder->root('she_group_menu');
-
-        return $treeBuilder;
+        return new TreeBuilder('she_group_menu');
     }
 }

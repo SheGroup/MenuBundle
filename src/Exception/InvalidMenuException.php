@@ -9,12 +9,8 @@ use Throwable;
 
 final class InvalidMenuException extends RuntimeException
 {
-    /** @var string */
-    private $name;
-
-    public function __construct(string $name, int $code = 0, Throwable $previous = null)
+    public function __construct(private readonly string $name, int $code = 0, ?Throwable $previous = null)
     {
-        $this->name = $name;
         parent::__construct(
             sprintf('Invalid menu: "%s".', $name),
             $code,

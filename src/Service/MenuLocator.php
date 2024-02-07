@@ -11,15 +11,11 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 final class MenuLocator
 {
-    /** @var RequestStack */
-    private $requestStack;
-
     /** @var array<string, MenuInterface> */
-    private $menus;
+    private array $menus;
 
-    public function __construct(RequestStack $requestStack)
+    public function __construct(private readonly RequestStack $requestStack)
     {
-        $this->requestStack = $requestStack;
         $this->menus = [];
     }
 
@@ -65,7 +61,7 @@ final class MenuLocator
 
     private function injectRequest(MenuInterface $menu): void
     {
-        $request = $this->requestStack->getMasterRequest();
+        $request = $this->requestStack->getMainRequest();
         if ($menu instanceof RequestAwareInterface && $request) {
             $menu->setRequest($request);
         }

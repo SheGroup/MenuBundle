@@ -8,9 +8,9 @@
     }
   },
   "require": {
-    "php": ">=7.4",
-    "symfony/framework-bundle": "^4.4",
-    "symfony/twig-bundle": "^4.4"
+    "php": ">=8.3",
+    "symfony/framework-bundle": "^7.0",
+    "symfony/twig-bundle": "^7.0"
   },
   "license": "MIT"
 }

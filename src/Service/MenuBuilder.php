@@ -12,32 +12,15 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 final class MenuBuilder
 {
-    /** @var RouterInterface */
-    private $router;
-
-    /** @var RequestStack */
-    private $requestStack;
-
-    /** @var AuthorizationCheckerInterface */
-    private $authorizationChecker;
-
-    /** @var Request|null */
-    private $currentRequest;
-
-    /** @var string|null */
-    private $currentRoute;
-
-    /** @var bool */
-    private $currentPathIsSelected;
+    private ?Request $currentRequest = null;
+    private ?string $currentRoute = null;
+    private bool $currentPathIsSelected;
 
     public function __construct(
-        RouterInterface $router,
-        RequestStack $requestStack,
-        AuthorizationCheckerInterface $authorizationChecker
+        private readonly RouterInterface $router,
+        private readonly RequestStack $requestStack,
+        private readonly AuthorizationCheckerInterface $authorizationChecker
     ) {
-        $this->router = $router;
-        $this->requestStack = $requestStack;
-        $this->authorizationChecker = $authorizationChecker;
         $this->currentPathIsSelected = false;
     }
 
@@ -245,7 +228,7 @@ final class MenuBuilder
     private function getCurrentRequest(): ?Request
     {
         if (!$this->currentRequest) {
-            $this->currentRequest = $this->requestStack ? $this->requestStack->getMasterRequest() : null;
+            $this->currentRequest = $this->requestStack->getMainRequest();
         }
 
         return $this->currentRequest;
