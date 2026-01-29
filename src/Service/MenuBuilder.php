@@ -193,7 +193,7 @@ final class MenuBuilder
                 return $this->currentPathIsSelected = true;
             }
             foreach ($item['active_parameters'] as $key => $value) {
-                if ($request->get($key) === $value) {
+                if ($request->attributes->get($key) === $value) {
                     return $this->currentPathIsSelected = true;
                 }
             }
@@ -215,7 +215,7 @@ final class MenuBuilder
                     return $this->currentPathIsSelected = true;
                 }
                 foreach ($item['active_parameters'] as $key => $value) {
-                    if ($request->get($key) === $value) {
+                    if ($request->attributes->get($key) === $value) {
                         return $this->currentPathIsSelected = true;
                     }
                 }
@@ -238,7 +238,7 @@ final class MenuBuilder
     {
         if (!$this->currentRoute) {
             $request = $this->getCurrentRequest();
-            $this->currentRoute = $request ? $request->get('_route') : null;
+            $this->currentRoute = $request?->attributes->get('_route');
         }
 
         return $this->currentRoute;
