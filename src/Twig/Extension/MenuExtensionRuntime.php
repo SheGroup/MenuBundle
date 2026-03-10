@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace SheGroup\MenuBundle\Twig\Extension;
 
+use InvalidArgumentException;
 use SheGroup\MenuBundle\Exception\InvalidMenuException;
 use SheGroup\MenuBundle\Service\MenuBuilder;
 use SheGroup\MenuBundle\Service\MenuLocator;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Twig\Environment;
 use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
@@ -19,10 +21,15 @@ final readonly class MenuExtensionRuntime implements RuntimeExtensionInterface
     {
     }
 
-    /** @throws LoaderError|SyntaxError|RuntimeError|InvalidMenuException */
+    /** @throws LoaderError|SyntaxError|RuntimeError|InvalidMenuException|InvalidArgumentException */
     public function render(Environment $env, string $name, string $template = 'sidebar', array $parameters = []): string
     {
         $builder = $this->menuLocator->locate($name);
+
+        $resolver = new OptionsResolver();
+        $builder->configureParameters($resolver);
+        $resolver->resolve($parameters);
+
         $menu = $builder->getMenu($parameters);
         $menu = $this->menuBuilder->build($menu);
         $loader = $env->getLoader();
