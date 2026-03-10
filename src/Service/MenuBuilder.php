@@ -24,7 +24,7 @@ final class MenuBuilder
         $this->currentPathIsSelected = false;
     }
 
-    public function build(array $menu, array $parameters = []): array
+    public function build(array $menu): array
     {
         $this->currentPathIsSelected = false;
         $required = ['attr', 'class', 'items', 'use_span'];
@@ -42,10 +42,10 @@ final class MenuBuilder
         }
 
         foreach ($menu['items'] as $i => $j) {
-            $menu['items'][$i] = $this->prepareItem($j, $parameters);
+            $menu['items'][$i] = $this->prepareItem($j);
             if (count($menu['items'][$i]['items'])) {
                 foreach ($menu['items'][$i]['items'] as $x => $y) {
-                    $menu['items'][$i]['items'][$x] = $this->prepareItem($y, $parameters);
+                    $menu['items'][$i]['items'][$x] = $this->prepareItem($y);
                     if ($menu['items'][$i]['items'][$x]['selected']) {
                         $menu['items'][$i]['selected'] = true;
                     }
@@ -60,7 +60,7 @@ final class MenuBuilder
         return $menu;
     }
 
-    private function prepareItem(array $item, array $parameters = []): array
+    private function prepareItem(array $item): array
     {
         $required = [
             'active',
@@ -93,10 +93,8 @@ final class MenuBuilder
         $item['active_routes'] = array_merge($item['active'], $item['active_routes']);
         unset($item['active']);
 
-        $parameters = array_merge($item['route_parameters'], $parameters);
-
         foreach ($item['items'] as $key => $value) {
-            $item['items'][$key] = $this->prepareItem($value, $parameters);
+            $item['items'][$key] = $this->prepareItem($value);
             if ($item['items'][$key]['selected']) {
                 $item['selected'] = true;
             }
@@ -104,7 +102,7 @@ final class MenuBuilder
 
         $item['link'] = '#';
         if ($item['route']) {
-            $item['link'] = $this->router->generate($item['route'], $parameters);
+            $item['link'] = $this->router->generate($item['route'], $item['route_parameters']);
         }
 
         $item['attributes'] = $this->buildAttributes($item['attr']);

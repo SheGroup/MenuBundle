@@ -23,8 +23,8 @@ final readonly class MenuExtensionRuntime implements RuntimeExtensionInterface
     public function render(Environment $env, string $name, string $template = 'sidebar', array $parameters = []): string
     {
         $builder = $this->menuLocator->locate($name);
-        $menu = $builder->getMenu();
-        $menu = $this->menuBuilder->build($menu, $parameters);
+        $menu = $builder->getMenu($parameters);
+        $menu = $this->menuBuilder->build($menu);
         $loader = $env->getLoader();
         if (
             method_exists($loader, 'exists')

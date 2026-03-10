@@ -6,5 +6,5 @@ namespace SheGroup\MenuBundle\Menu;
 
 interface MenuInterface
 {
-    public function getMenu(): array;
+    public function getMenu(array $parameters = []): array;
 }
