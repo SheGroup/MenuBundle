@@ -100,7 +100,9 @@ final class MenuBuilder
             }
         }
 
-        $item['link'] = '#';
+        if (!isset($item['link'])) {
+            $item['link'] = '#';
+        }
         if ($item['route']) {
             $item['link'] = $this->router->generate($item['route'], $item['route_parameters']);
         }
